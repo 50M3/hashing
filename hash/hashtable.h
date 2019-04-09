@@ -13,20 +13,21 @@
 #include <iostream>
 #include "linked_list.h"
 
-class hasht{
+// hash_t - Klasse
+class hash_t{
 public:
-    hasht(int slots = 1000);
-    ~hasht();
-    int hash(int key);
-    node_t *newNode(int first_value);
-    void addKey(int key);
-    //bool deleteKey(int key);
+    hash_t(int slots = 1000);                   //Konstruktor
+    ~hash_t();                                  //Dekonstruktor
+    int hash(int key);                          //Hashfunktion
+    node_t *newNode(int first_value);           //Neue Liste
+    void add(int key);                          //Einfügfunktion
+    bool remove(int key);                       //Löschfunktion
     //void printTable();
-    bool search(int key);
+    bool search(int key);                       //Suchfunktion
 
 private:
-    int m;
-    int n;
+    int m;                                      //Anzahl der Schlüssel
+    int n;                                      //Anzahl der Spalten
 
     node_t **hashTable;
 };
