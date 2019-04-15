@@ -38,19 +38,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = C:\Users\Flo\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe
+CMAKE_COMMAND = C:\Users\Admin\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe
 
 # The command to remove a file.
-RM = C:\Users\Flo\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe -E remove -f
+RM = C:\Users\Admin\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = F:\gdi
+CMAKE_SOURCE_DIR = C:\Users\Admin\Documents\github\hashing\hash
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = F:\gdi\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Admin\Documents\github\hashing\hash\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -58,7 +58,7 @@ CMAKE_BINARY_DIR = F:\gdi\cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	C:\Users\Flo\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	C:\Users\Admin\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,7 +69,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	C:\Users\Flo\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available."
+	C:\Users\Admin\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6183.77\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -79,9 +79,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start F:\gdi\cmake-build-debug\CMakeFiles F:\gdi\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\github\hashing\hash\cmake-build-debug\CMakeFiles C:\Users\Admin\Documents\github\hashing\hash\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start F:\gdi\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\github\hashing\hash\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -149,33 +149,6 @@ hashtable.cpp.s:
 	$(MAKE) -f CMakeFiles\gdi.dir\build.make CMakeFiles/gdi.dir/hashtable.cpp.s
 .PHONY : hashtable.cpp.s
 
-linked_list.obj: linked_list.cpp.obj
-
-.PHONY : linked_list.obj
-
-# target to build an object file
-linked_list.cpp.obj:
-	$(MAKE) -f CMakeFiles\gdi.dir\build.make CMakeFiles/gdi.dir/linked_list.cpp.obj
-.PHONY : linked_list.cpp.obj
-
-linked_list.i: linked_list.cpp.i
-
-.PHONY : linked_list.i
-
-# target to preprocess a source file
-linked_list.cpp.i:
-	$(MAKE) -f CMakeFiles\gdi.dir\build.make CMakeFiles/gdi.dir/linked_list.cpp.i
-.PHONY : linked_list.cpp.i
-
-linked_list.s: linked_list.cpp.s
-
-.PHONY : linked_list.s
-
-# target to generate assembly for a file
-linked_list.cpp.s:
-	$(MAKE) -f CMakeFiles\gdi.dir\build.make CMakeFiles/gdi.dir/linked_list.cpp.s
-.PHONY : linked_list.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -215,9 +188,6 @@ help:
 	@echo ... hashtable.obj
 	@echo ... hashtable.i
 	@echo ... hashtable.s
-	@echo ... linked_list.obj
-	@echo ... linked_list.i
-	@echo ... linked_list.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

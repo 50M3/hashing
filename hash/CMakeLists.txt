@@ -3,4 +3,4 @@ project(gdi)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(gdi main.cpp linked_list.cpp linked_list.h hashtable.cpp hashtable.h)
+add_executable(gdi main.cpp hashtable.cpp hashtable.h)

@@ -11,7 +11,11 @@
 #endif //GDI_HASHTABLE_H
 
 #include <iostream>
-#include "linked_list.h"
+typedef struct node{
+    int data;
+    struct node *prev;
+    struct node *next;
+} node_t;
 
 // hash_t - Klasse
 class hash_t{
