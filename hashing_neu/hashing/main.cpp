@@ -1,4 +1,10 @@
-
+//  ***********************************************************************************************************
+//  Name:       main.cpp
+//  Author:     Florian Liehr
+//  Datum:      07.05.2019
+//  Uhrzeit:    21:14
+//  Beschreib.: Implementiert wichtige Funktionen für Hashing
+//  ***********************************************************************************************************
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -27,9 +33,13 @@ int getHash(int data);
 
 using namespace std;
 
-// *********************************************
-// KEY STRUKTUR
-// *********************************************
+
+/*
+ * typedef struct key
+ *  Erstellt die Struktur key
+ *	welche aus der Data und dem State besteht
+ *
+ * */
 typedef struct key {
 	int data;
 	int state; // -1 = frei, 0 = entfernt, 1 = belegt
@@ -38,9 +48,7 @@ typedef struct key {
 key* hashtable[TABLE_SIZE];
 key* hashtable_quad[TABLE_SIZE];
 
-// *********************************************
-// MAIN
-// *********************************************
+
 int main() {
 	for (int i = 0; i < TABLE_SIZE; i++) {
 		hashtable[i] = new key{ 0, FREI };
@@ -108,10 +116,17 @@ int main() {
 
 }
 
-
-// *********************************************
-// FUNKTIONEN
-// *********************************************
+/*
+ * int insert_key(int data)
+ *  Fuegt ein Element nach linearem Sondieren in die Liste ein!
+ *	
+ * Parameterliste:
+ *  int data: Der Key der eingefügt werden soll.
+ *
+ * Rückgabeparameter:
+ *  @i = Der gehashte Key
+ *
+ * */
 int insert_key(int data) {
 	int i = 0, j = 0;
 
@@ -133,6 +148,17 @@ int insert_key(int data) {
 	return i;
 }
 
+/*
+ * int insert_key_quad(int data)
+ *  Fuegt ein Element nach quadratischem Sondieren in die Liste ein!
+ *
+ * Parameterliste:
+ *  int data: Der Key der eingefügt werden soll.
+ *
+ * Rückgabeparameter:
+ *  @i = Der gehashte Key
+ *
+ * */
 int insert_key_quad(int data) {
 	int i = 0, j = 0;
 
@@ -153,6 +179,18 @@ int insert_key_quad(int data) {
 	return i;
 }
 
+/*
+ * int search_key(int data)
+ *  Sucht einen Key in der Liste und vergleich in jedem Behälter die Schlüssel!
+ *
+ * Parameterliste:
+ *  int data: Der Key der eingefügt werden soll.
+ *
+ * Rückgabeparameter:
+ *  @i = Der gehashte Key
+ *	@FREI = Ein leerer Slot wurde entdeckt!
+ *
+ * */
 int search_key(int data) {
 	/*int i = 0, hash = lin_hash(data, i++);
 
@@ -182,6 +220,15 @@ int search_key(int data) {
 	return FREI;
 }
 
+/*
+ * int biggestClusterSize()
+ *  Wie groß das größte Cluster ist!
+ *
+ * Rückgabeparameter:
+ *  @ count > max = return count
+ *  @ max = return max;
+ *
+ * */
 int biggestClusterSize(){
 	int count = 0, max = 0;
 
@@ -200,6 +247,14 @@ int biggestClusterSize(){
 	return (count > max) ? count : max;
 }
 
+/*
+ * int clusterAmount()
+ *  Zählt die Cluster in der Hashtabelle!
+ *
+ * Rückgabeparameter:
+ *  @count = Anzahl der Cluster!
+ *
+ * */
 int clusterAmount() {
 	int count = 0;
 	bool found = false;
@@ -219,10 +274,18 @@ int clusterAmount() {
 }
 
 
-// *********************************************
-// ALGORITHMEN
-// *********************************************
-
+/*
+ * double alpha(int capacity, int number_of_elements)
+ *  Gibt an zu wie viel % die Liste gefüllt ist
+ * 
+ * Parameterliste:
+ *	int capacity: Größe der Tabelle
+ *  int number_of_elements: Anzahl der Elemente in der Liste
+ *
+ * Rückgabeparamter:
+ *  @number_of_elements * 1.0 / capacity = Füllstand der Hashtabelle
+ *
+ * */
 double alpha(int capacity, int number_of_elements) {
 	return number_of_elements * 1.0 / capacity;
 }
@@ -236,18 +299,50 @@ double lin_fail(double alpha) {
 }
 
 
-// *********************************************
-// HASHING
-// *********************************************
 
+/*
+ * int lin_hash(int data, int i)
+ *  Hash nach linearer Sondierung
+ *
+ * Parameterliste:
+ *  int data: Der Key der eingefügt werden soll.
+ *  int i: Position in der Angefangen wird Keys einzufügen!
+ *
+ * Rückgabeparameter:
+ *  @(getHash(data) + i) % MAX_HASH = Linear gehashter Key
+ *
+ * */
 int lin_hash(int data, int i) {
 	return (getHash(data) + i) % MAX_HASH;
 }
 
+/*
+ * int quad_hash(int data, int i)
+ *  Hash nach quadratischer Sondierung
+ *
+ * Parameterliste:
+ *  int data: Der Key der eingefügt werden soll.
+ *  int i: Position in der Angefangen wird Keys einzufügen!
+ *
+ * Rückgabeparameter:
+ *  @getHash(getHash(data) + (pow(i / 2, 2) * pow(-1, i)));H = Quadratisch sondierter Key
+ *
+ * */
 int quad_hash(int data, int i) {
 	return getHash(getHash(data) + (pow(i / 2, 2) * pow(-1, i)));
 }
 
+/*
+ * int getHash(int data)
+ *  Gehashter Key nach Divisionsmethode!
+ *
+ * Parameterliste:
+ *  int data: Der Key der gehasht wird.
+ *
+ * Rückgabeparameter:
+ *  @data % MAX_HASH = Gehashter Key
+ *
+ * */
 int getHash(int data) {
 	return data % MAX_HASH;
 }
