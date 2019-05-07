@@ -155,3 +155,4 @@ bool hash_t::search(int key) {
 
     return true;
 }
+

@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Admin/Documents/github/hashing/hash/hashtable.cpp" "C:/Users/Admin/Documents/github/hashing/hash/cmake-build-debug/CMakeFiles/gdi.dir/hashtable.cpp.obj"
-  "C:/Users/Admin/Documents/github/hashing/hash/main.cpp" "C:/Users/Admin/Documents/github/hashing/hash/cmake-build-debug/CMakeFiles/gdi.dir/main.cpp.obj"
+  "F:/github/hashing/hash/hashtable.cpp" "F:/github/hashing/hash/cmake-build-debug/CMakeFiles/gdi.dir/hashtable.cpp.obj"
+  "F:/github/hashing/hash/main.cpp" "F:/github/hashing/hash/cmake-build-debug/CMakeFiles/gdi.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

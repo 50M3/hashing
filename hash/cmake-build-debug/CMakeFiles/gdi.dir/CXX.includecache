@@ -6,3 +6,13 @@
 
 #IncludeRegexTransform: 
 
+F:/github/hashing/hash/hashtable.h
+iostream
+-
+
+F:/github/hashing/hash/main.cpp
+iostream
+-
+hashtable.h
+F:/github/hashing/hash/hashtable.h
+
