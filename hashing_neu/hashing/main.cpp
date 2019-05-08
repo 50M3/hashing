@@ -9,8 +9,8 @@
 #include <iomanip>
 #include <cmath>
 
-#define MAX_HASH 53
-#define TABLE_SIZE 53
+#define MAX_HASH 8
+#define TABLE_SIZE 16
 #define FREI -1
 #define ENTFERNT -2
 #define BELEGT 1
@@ -81,6 +81,8 @@ int main() {
 			cout << "Anzahl der Schluesselvergleiche (insgesamt): " << comparisons << endl;
 			cout << "Anzahl der erfolgreichen Suchen: " << anzahl.erfolg << endl;
 			cout << "Anzahl der erfolglosen Suchen: " << anzahl.erfolglos << endl;
+			cout << "Durchschnittliche Vergleiche: " << (double)comparisons / MAX_HASH << endl;
+			cout << "Alpha: " << (double)MAX_HASH / (double)TABLE_SIZE << endl;
 			//cout << "Lin: Anzahl der Cluster: " << clusterAmount() << endl;
 			//cout << "Lin: Groestes Cluster: " << biggestClusterSize() << endl;
 
