@@ -9,8 +9,8 @@
 #include <iomanip>
 #include <cmath>
 
-#define MAX_HASH 10
-#define TABLE_SIZE 10
+#define MAX_HASH 53
+#define TABLE_SIZE 53
 #define FREI -1
 #define ENTFERNT -2
 #define BELEGT 1
@@ -45,8 +45,14 @@ typedef struct key {
 	int state; // -1 = frei, 0 = entfernt, 1 = belegt
 }key;
 
+typedef struct search {
+	int erfolg = 0;
+	int erfolglos = 0;
+}search;
+
 key* hashtable[TABLE_SIZE];
 key* hashtable_quad[TABLE_SIZE];
+search anzahl;
 
 
 int main() {
@@ -54,9 +60,9 @@ int main() {
 		hashtable[i] = new key{ 0, FREI };
 	}
 
-	for (int j = 0; j < TABLE_SIZE; j++) {
+	/*for (int j = 0; j < TABLE_SIZE; j++) {
 		hashtable_quad[j] = new key{ 0, FREI };
-	}
+	}*/
 
 	try {
 		while (true) {
@@ -65,15 +71,18 @@ int main() {
 
 			cout << "************************************" << endl;
 			print_hashtable();
-			print_hashtable_quad();
+			//print_hashtable_quad();
 			cout << "0 -> Element in Hashtabelle einfuegen" << endl;
 			cout << "1 -> Element in Hashtabelle suchen" << endl;
 			cout << "2 -> Element in Hashtabelle QUAD einfuegen" << endl;
+			cout << "5 -> Testrutiene ausführen!" << endl;
 			cout << "3 -> Programm schliessen" << endl;
 			cout << "************************************" << endl;
 			cout << "Anzahl der Schluesselvergleiche (insgesamt): " << comparisons << endl;
-			cout << "Lin: Anzahl der Cluster: " << clusterAmount() << endl;
-			cout << "Lin: Groestes Cluster: " << biggestClusterSize() << endl;
+			cout << "Anzahl der erfolgreichen Suchen: " << anzahl.erfolg << endl;
+			cout << "Anzahl der erfolglosen Suchen: " << anzahl.erfolglos << endl;
+			//cout << "Lin: Anzahl der Cluster: " << clusterAmount() << endl;
+			//cout << "Lin: Groestes Cluster: " << biggestClusterSize() << endl;
 
 			int eingabe = 0;
 			int select = 0;
@@ -105,6 +114,17 @@ int main() {
 			case 3:
 				cout << "-Programm schliessen" << endl;
 				exit(EXIT_SUCCESS);
+
+			case 5:
+				cout << "-Testrutieren wird ausgeführt!" << endl;
+				for (int i = 0; i < MAX_HASH; i++) {
+					insert_key(i);
+					search_key(i);
+					search_key(MAX_HASH + i);
+				}
+				//delete_key(4);
+				//delete_key(10);
+				break;
 			}
 
 		}
@@ -159,7 +179,7 @@ int insert_key(int data) {
  *  @i = Der gehashte Key
  *
  * */
-int insert_key_quad(int data) {
+/*int insert_key_quad(int data) {
 	int i = 0, j = 0;
 
 	do{
@@ -167,7 +187,7 @@ int insert_key_quad(int data) {
 		if (hashtable_quad[i]->state == BELEGT) {
 			comparisons++;
 		}
-		if (j >= TABLE_SIZE) {
+		if (j > TABLE_SIZE) {
 			throw "Hashtabelle ist voll! [insert_key_quad]";
 		}
 		j++;
@@ -177,8 +197,24 @@ int insert_key_quad(int data) {
 	hashtable_quad[i]->state = BELEGT;
 
 	return i;
-}
+}*/
 
+int insert_key_quad(int data) {
+	int i = 1;
+
+	do {
+		int hash = quad_hash(data, i++);
+
+		if (hashtable_quad[hash]->state == FREI || hashtable_quad[hash]->state == ENTFERNT) {
+			hashtable_quad[hash]->data = data;
+			hashtable_quad[hash]->state = BELEGT;
+			return hash;
+		}
+		comparisons++;
+	} while (i < TABLE_SIZE);
+
+	throw "Hashtabelle ist voll! [insert_key_quad]";
+}
 /*
  * int search_key(int data)
  *  Sucht einen Key in der Liste und vergleich in jedem Behälter die Schlüssel!
@@ -191,33 +227,40 @@ int insert_key_quad(int data) {
  *	@FREI = Ein leerer Slot wurde entdeckt!
  *
  * */
-int search_key(int data) {
-	/*int i = 0, hash = lin_hash(data, i++);
 
-	while (hashtable[hash]->state != FREI && i < TABLE_SIZE) {
+int search_key(int data) {
+	int i = 0, hash = lin_hash(data, i++);
+
+	while (hashtable[hash]->state == BELEGT && i < TABLE_SIZE) {
 		comparisons++;
+
 		if (hashtable[hash]->data == data) {
+			anzahl.erfolg += 1;
 			return hash;
 		}
 
 		hash = lin_hash(data, i++);
 	}
-	return FREI;*/
+	
+	anzahl.erfolglos += 1;
+	return FREI;
+}
 
-	int i = 0, j = 0;
+void delete_key(int data) {
+	int hash = 0, i = 0;
 
 	do {
-		i = (lin_hash(data, j));
-		if (hashtable[i]->state == BELEGT) {
+		hash = (lin_hash(data, i));
+		if (hashtable[hash]->state == BELEGT) {
 			comparisons++;
 		}
-		if (hashtable[i]->data == data) {
-			return i;
-		}
-		j++;
-	} while (hashtable[i]->state != FREI && j < TABLE_SIZE);
+		i++;
+	} while (hashtable[hash]->state == BELEGT && hashtable[hash]->data != data);
 
-	return FREI;
+	if (hashtable[hash]->state == BELEGT && hashtable[hash]->data == data) {
+		hashtable[hash]->state = ENTFERNT;
+		hashtable[hash]->data = 0;
+	}
 }
 
 /*
