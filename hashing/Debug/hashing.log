@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\LKulu\Desktop\hashing-master\hashing_neu\hashing\main.cpp(105): warning C4551: Dem Funktionsaufruf fehlt die Argumentliste
+C:\Users\LKulu\Desktop\hashing-master\hashing_neu\hashing\main.cpp(112): warning C4551: Dem Funktionsaufruf fehlt die Argumentliste
+C:\Users\LKulu\Desktop\hashing-master\hashing_neu\hashing\main.cpp(399): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
+  hashing.vcxproj -> C:\Users\LKulu\Desktop\hashing-master\hashing_neu\Debug\hashing.exe
